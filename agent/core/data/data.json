@@ -1,0 +1,27 @@
+{
+    "user_id": "123",
+    "user_name": "John Doe",
+    "user_email": "john.doe@example.com",
+    "user_phone": "+1234567890",
+    "user_address": "123 Main St, Anytown, USA",
+    "user_city": "Anytown",
+    "user_state": "CA",
+    "user_zip": "12345",
+    "user_country": "USA",
+    "tasks": [
+        {
+            "task_id": "123",
+            "date": "2025-01-01",
+            "task_name": "Task 1",
+            "task_description": "Task 1 description",
+            "task_status": "pending"
+        },
+        {
+            "task_id": "124",
+            "date": "2025-01-01",
+            "task_name": "Task 2",
+            "task_description": "Task 2 description",
+            "task_status": "pending"
+        }
+    ]
+}
