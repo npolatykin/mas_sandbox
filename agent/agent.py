@@ -5,6 +5,7 @@ from langgraph.types import Command
 
 from .core.enums import StageEnum
 from .core.models import State
+from .core.logger import logger
 import os
 from uuid import uuid4
 
@@ -43,9 +44,15 @@ class Agent(BaseAgent):
         # один и тот же thread_id на всю сессию CLI,
         # чтобы память переписок сохранялась между сообщениями
         self.thread_id = os.getenv("THREAD_ID") or f"cli-session-{uuid4().hex[:8]}"
+        
+        # Логируем инициализацию агента
+        logger.info(f"Агент инициализирован с thread_id: {self.thread_id}", "Agent")
 
     def process_message(self, message: str) -> str:
         try:
+            # Логируем входящее сообщение
+            logger.log_user_interaction(message, "", {"thread_id": self.thread_id})
+            
             initial_state = {
                 "messages": [],
                 "user_data": {"user_id": "default"},
@@ -54,18 +61,27 @@ class Agent(BaseAgent):
                 "message_to_user": []
             }
 
+            # Логируем начало обработки
+            logger.info(f"Начинаю обработку сообщения через граф", "Agent", {"state": initial_state})
+
             # >>> ПЕРЕДАЁМ CONFIG С thread_id <<<
             result = self.graph.invoke(
                 initial_state,
                 config={"configurable": {"thread_id": self.thread_id}}
             )
+            
+            # Логируем результат
+            logger.info(f"Граф обработал сообщение", "Agent", {"result": result})
+            print(result)       
 
             ai_messages = result.get("message_to_user", [])
-            if ai_messages:
-                return ai_messages[-1]
-            else:
-                return self._simple_response(message)
+            
+            # Логируем ответ
+            logger.log_user_interaction(message, str(ai_messages), {"thread_id": self.thread_id})
+            
+            return ai_messages
 
         except Exception as e:
+            # Логируем ошибку
+            logger.error(f"Ошибка обработки сообщения: {str(e)}", "Agent", {"message": message, "thread_id": self.thread_id})
             return f"Ошибка обработки: {str(e)}"
-            return f"Я понял ваш запрос: '{message}'. Чем еще могу помочь?"

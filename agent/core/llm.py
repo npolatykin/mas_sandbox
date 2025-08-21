@@ -1,5 +1,6 @@
 from yandex_cloud_ml_sdk import YCloudML
 from typing import Optional
+from .logger import logger
 
 
 class YandexGPT:
@@ -14,11 +15,32 @@ class YandexGPT:
             model,
             model_version=version
         ).configure(temperature=0.5)
+        
+        # Логируем инициализацию YandexGPT
+        logger.info(f"YandexGPT инициализирован", "LLM", {
+            "model": model,
+            "version": version,
+            "folder_id": folder_id[:8] + "..." if folder_id else None
+        })
 
     def complete(self, prompt: str) -> str:
         try:
+            # Логируем начало запроса
+            logger.debug(f"Отправляю запрос к YandexGPT", "LLM", {"prompt_length": len(prompt)})
+            
             response = self.model.run(prompt)
-            # print(response)
-            return response.alternatives[0].text
+            
+            # Логируем успешный ответ с токенами
+            response_text = response.alternatives[0].text
+            
+            # Логируем с детальной информацией о токенах
+            logger.log_llm(response, "yandexgpt-lite")
+            
+            logger.debug(f"Получен ответ от YandexGPT: {response_text}", "LLM", {"response": response_text})
+            
+            return response_text
+            
         except Exception as e:
+            # Логируем ошибку
+            logger.error(f"Ошибка YandexGPT: {str(e)}", "LLM", {"prompt_length": len(prompt)})
             raise RuntimeError(f"YandexGPT request failed: {e}")

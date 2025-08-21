@@ -7,14 +7,15 @@ from .enums import StageEnum
 from .models import State
 from .llm import YandexGPT
 from .prompts import PROMPTS
-from .utils import Logger
-
-logger = Logger("nodes")
+from .logger import logger
 
 class Graph:
     def __init__(self, yandex_gpt: YandexGPT):
         self.gpt = yandex_gpt
         self._memory = MemorySaver()
+        
+        # Логируем инициализацию графа
+        logger.info("Граф инициализирован", "Graph", {"gpt_available": yandex_gpt is not None})
 
     def get_graph(self):
         graph = StateGraph(State)
@@ -34,6 +35,7 @@ class Graph:
         graph.add_edge(StageEnum.GENERATE_NODE, END)
         graph.add_edge(StageEnum.OTHER_NODE, END)
 
+        logger.info("Граф скомпилирован", "Graph")
         return graph.compile(checkpointer=self._memory)
 
     def _router_decision(self, state: State) -> str:
@@ -48,9 +50,14 @@ class Graph:
         try:
             user_query = state.get('message_from_user', [''])[-1] if state.get('message_from_user') else ''
             
+            logger.log_graph_node("Router", f"Обрабатываю запрос: {user_query[:50]}...")
+            
             prompt = PROMPTS["router"]
             response = self.gpt.complete(prompt)
-                    
+            
+            # Токены уже залогированы в YandexGPT.complete
+            logger.log_graph_node("Router", f"Маршрутизация на узел: {stage}")
+            
             # Определяем следующий узел на основе ответа LLM
             if "generate_node" in response.lower():
                 stage = StageEnum.GENERATE_NODE
@@ -67,6 +74,8 @@ class Graph:
             
         except Exception as e:
             # Fallback на other_node при ошибке
+            logger.error(f"Ошибка в узле маршрутизации: {str(e)}", "Graph", {"node": "Router", "user_query": user_query})
+            
             updated_state = {
                 "messages": state.get('messages', []) + [f"Ошибка маршрутизации: {str(e)}"],
                 "stage": StageEnum.OTHER_NODE
@@ -78,8 +87,13 @@ class Graph:
         try:
             user_query = state.get('message_from_user', [''])[-1] if state.get('message_from_user') else ''
             
+            logger.log_graph_node("Generate", f"Генерирую ответ на: {user_query[:50]}...")
+            
             prompt = PROMPTS["generate_node"] + f"\n\nВопрос пользователя: {user_query}"
             response = self.gpt.complete(prompt)
+            
+            # Логируем вызов LLM (токены уже залогированы в YandexGPT.complete)
+            logger.log_graph_node("Generate", "Ответ сгенерирован успешно")
             
             # Обновляем состояние и переходим к концу
             updated_state = {
@@ -92,10 +106,12 @@ class Graph:
             
         except Exception as e:
             # Fallback ответ при ошибке
+            logger.error(f"Ошибка в узле генерации: {str(e)}", "Graph", {"node": "Generate", "user_query": user_query})
+            
             response = f"Я понял ваш запрос: '{user_query}'. Это интересный вопрос!"
             updated_state = {
                 "messages": state.get('messages', []) + [response],
-                "message_to_user": state.get('message_to_user', []) + [response],
+                "message_to_user": response,
                 "stage": StageEnum.END
             }
             return Command(goto=END, update=updated_state)
@@ -105,8 +121,13 @@ class Graph:
         try:
             user_query = state.get('message_from_user', [''])[-1] if state.get('message_from_user') else ''
             
+            logger.log_graph_node("Other", f"Обрабатываю запрос: {user_query[:50]}...")
+            
             prompt = PROMPTS["other_node"] + f"\n\nЗапрос пользователя: {user_query}"
             response = self.gpt.complete(prompt)
+            
+            # Логируем вызов LLM (токены уже залогированы в YandexGPT.complete)
+            logger.log_graph_node("Other", "Запрос обработан успешно")
             
             # Обновляем состояние и переходим к концу
             updated_state = {
@@ -119,10 +140,12 @@ class Graph:
             
         except Exception as e:
             # Fallback ответ при ошибке
+            logger.error(f"Ошибка в узле Other: {str(e)}", "Graph", {"node": "Other", "user_query": user_query})
+            
             response = f"Обрабатываю ваш запрос: '{user_query}'. Чем еще могу помочь?"
             updated_state = {
                 "messages": state.get('messages', []) + [response],
-                "message_to_user": state.get('message_to_user', []) + [response],
+                "message_to_user": response,
                 "stage": StageEnum.END
             }
             return Command(goto=END, update=updated_state)

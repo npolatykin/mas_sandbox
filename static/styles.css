@@ -1,0 +1,560 @@
+/* Сброс стилей и базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Основной контейнер */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Заголовок */
+.app-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Основной контент */
+.main-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Секция чата */
+.chat-section {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.chat-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.chat-container {
+    flex: 1;
+    padding: 1.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+}
+
+.chat-input-section {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.chat-form {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+}
+
+.message-input {
+    flex: 1;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.message-input:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.message-input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.send-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+}
+
+/* Секция логов */
+.logs-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Панель статистики */
+.stats-panel {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stats-panel h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 0.5rem;
+}
+
+.cost-value {
+    color: #ff6b6b;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Панель логов */
+.logs-panel {
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+}
+
+.logs-header {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logs-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.logs-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-select {
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+.filter-select:hover {
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.filter-select:focus {
+    border-color: #4facfe;
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+    transform: translateY(-1px);
+}
+
+.filter-select option {
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    color: white;
+    padding: 0.5rem;
+}
+
+.logs-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.no-logs-message {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255,255,255,0.6);
+}
+
+/* Сообщения чата */
+.chat-message {
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+}
+
+.chat-message:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.user-message {
+    margin-left: 15%;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border-left: 4px solid #00d4ff;
+}
+
+.ai-message {
+    margin-right: 15%;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #333;
+    border-left: 4px solid #ff6b9d;
+}
+
+.message-content {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    text-align: right;
+}
+
+.ai-message .message-time {
+    color: rgba(0,0,0,0.6);
+}
+
+/* Записи логов */
+.log-entry {
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    padding: 1rem;
+    margin: 0.8rem 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+
+}
+
+.log-entry:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.log-debug { border-left: 4px solid #4facfe; }
+.log-info { border-left: 4px solid #38ef7d; }
+.log-warning { border-left: 4px solid #ffa726; }
+.log-error { border-left: 4px solid #ff6b6b; }
+.log-critical { border-left: 4px solid #ff4757; }
+
+/* Кнопки */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+/* Индикатор загрузки */
+.loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+}
+
+.loading-indicator.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top: 4px solid #4facfe;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Уведомления */
+.notifications {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.notification {
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    animation: slideInRight 0.3s ease-out;
+    max-width: 400px;
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+}
+
+/* Анимации */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+/* Анимация появления для контейнера логов */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Скроллбары */
+.chat-container::-webkit-scrollbar,
+.logs-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track,
+.logs-container::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb,
+.logs-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover,
+.logs-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .logs-section {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .app-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .chat-form {
+        flex-direction: column;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .logs-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .filter-select {
+        min-width: 100%;
+    }
+}

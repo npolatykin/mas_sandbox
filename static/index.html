@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Testing Agent Sandbox</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Заголовок -->
+        <header class="app-header">
+            <h1>🤖 UI Testing Agent Sandbox</h1>
+            <div class="header-controls">
+                <button id="clearLogsBtn" class="btn btn-danger">🗑️ Очистить логи</button>
+            </div>
+        </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Левая колонка - Чат -->
+            <div class="chat-section">
+                <div class="chat-header">
+                    <h2>💬 Чат</h2>
+                </div>
+                <div class="chat-container" id="chatContainer">
+                    <div class="welcome-message">
+                        <p>👋 Добро пожаловать! Начните общение с агентом.</p>
+                    </div>
+                </div>
+                <div class="chat-input-section">
+                    <form id="chatForm" class="chat-form">
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="messageInput" 
+                                placeholder="Введите ваше сообщение..." 
+                                class="message-input"
+                                autocomplete="off"
+                            >
+                            <button type="submit" class="btn btn-primary send-btn">
+                                <span>🚀</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Правая колонка - Логи и статистика -->
+            <div class="logs-section">
+                <!-- Статистика токенов -->
+                <div class="stats-panel" id="statsPanel">
+                    <h3>📊 Статистика токенов</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalTokens">0</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="inputTokens">0</div>
+                            <div class="stat-label">Prompt</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="completionTokens">0</div>
+                            <div class="stat-label">Complete</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value cost-value" id="totalCost">0 ₽</div>
+                            <div class="stat-label">Cost</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Логи -->
+                <div class="logs-panel">
+                    <div class="logs-header">
+                        <h3>📋 Логи</h3>
+                        <div class="logs-controls">
+                            <select id="logLevelFilter" class="filter-select">
+                                <option value="Все">Все уровни</option>
+                                <option value="DEBUG">DEBUG</option>
+                                <option value="INFO">INFO</option>
+                                <option value="WARNING">WARNING</option>
+                                <option value="ERROR">ERROR</option>
+                                <option value="CRITICAL">CRITICAL</option>
+                            </select>
+                            <select id="logLimitFilter" class="filter-select">
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="logs-container" id="logsContainer">
+                        <div class="no-logs-message">
+                            <p>📝 Логи отсутствуют</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Индикатор загрузки -->
+        <div id="loadingIndicator" class="loading-indicator hidden">
+            <div class="spinner"></div>
+            <span>🤖 Агент думает...</span>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notifications" class="notifications"></div>
+    </div>
+
+    <script src="static/app.js"></script>
+</body>
+</html>
