@@ -1,27 +1,160 @@
 {
-    "user_id": "123",
-    "user_name": "John Doe",
-    "user_email": "john.doe@example.com",
-    "user_phone": "+1234567890",
-    "user_address": "123 Main St, Anytown, USA",
-    "user_city": "Anytown",
-    "user_state": "CA",
-    "user_zip": "12345",
-    "user_country": "USA",
-    "tasks": [
+    "users": [
         {
-            "task_id": "123",
-            "date": "2025-01-01",
-            "task_name": "Task 1",
-            "task_description": "Task 1 description",
-            "task_status": "pending"
+            "user_id": "123",
+            "user_name": "John Doe",
+            "user_email": "john.doe@example.com",
+            "user_phone": "+1234567890",
+            "user_address": "123 Main St, Anytown, USA",
+            "user_city": "Anytown",
+            "user_state": "CA",
+            "user_zip": "12345",
+            "user_country": "USA",
+            "tasks": [
+                {
+                    "task_id": "1",
+                    "user_id": "123",
+                    "date": "2025-01-01",
+                    "task_name": "Task 1",
+                    "task_description": "Написать отчет по проекту",
+                    "task_status": "pending"
+                },
+                {
+                    "task_id": "2",
+                    "user_id": "123",
+                    "date": "2025-01-01",
+                    "task_name": "Task 2",
+                    "task_description": "Написать документацию по проекту",
+                    "task_status": "pending"
+                },
+                {
+                    "task_id": "3",
+                    "user_id": "123",
+                    "date": "2025-10-21",
+                    "task_name": "Task 3",
+                    "task_description": "Создать новый заказ",
+                    "task_status": "pending"
+                },
+                {
+                    "task_id": "4",
+                    "user_id": "123",
+                    "date": "2025-10-21",
+                    "task_name": "Задача 4",
+                    "task_description": "Купить кондиционер для офиса",
+                    "task_status": "pending"
+                }
+            ]
         },
         {
-            "task_id": "124",
-            "date": "2025-01-01",
-            "task_name": "Task 2",
-            "task_description": "Task 2 description",
-            "task_status": "pending"
+            "user_id": "456",
+            "user_name": "Иван Петров",
+            "user_email": "ivan.petrov@example.com",
+            "user_phone": "+79001234567",
+            "user_address": "ул. Ленина, д. 10, кв. 5",
+            "user_city": "Москва",
+            "user_state": "",
+            "user_zip": "101000",
+            "user_country": "Россия",
+            "tasks": [
+                {
+                    "task_id": "5",
+                    "user_id": "456",
+                    "date": "2025-10-15",
+                    "task_name": "Разработать API",
+                    "task_description": "Создать REST API для мобильного приложения",
+                    "task_status": "in_progress"
+                },
+                {
+                    "task_id": "6",
+                    "user_id": "456",
+                    "date": "2025-10-20",
+                    "task_name": "Провести код-ревью",
+                    "task_description": "Проверить код от коллеги и оставить комментарии",
+                    "task_status": "completed"
+                },
+                {
+                    "task_id": "7",
+                    "user_id": "456",
+                    "date": "2025-11-01",
+                    "task_name": "Обновить документацию",
+                    "task_description": "Добавить новые разделы в документацию проекта",
+                    "task_status": "pending"
+                },
+                {
+                    "task_id": "13",
+                    "user_id": "456",
+                    "date": "2025-11-02",
+                    "task_name": "Чебупицца",
+                    "task_description": "Съесть 10 чебупицц",
+                    "task_status": "pending"
+                }
+            ]
+        },
+        {
+            "user_id": "789",
+            "user_name": "Alice Smith",
+            "user_email": "alice.smith@example.com",
+            "user_phone": "+44123456789",
+            "user_address": "10 Downing Street",
+            "user_city": "London",
+            "user_state": "",
+            "user_zip": "SW1A 2AA",
+            "user_country": "United Kingdom",
+            "tasks": [
+                {
+                    "task_id": "8",
+                    "user_id": "789",
+                    "date": "2025-10-18",
+                    "task_name": "Plan team meeting",
+                    "task_description": "Organize quarterly team meeting for Q4",
+                    "task_status": "in_progress"
+                },
+                {
+                    "task_id": "9",
+                    "user_id": "789",
+                    "date": "2025-10-25",
+                    "task_name": "Review budget",
+                    "task_description": "Review and approve department budget for next quarter",
+                    "task_status": "pending"
+                },
+                {
+                    "task_id": "10",
+                    "user_id": "789",
+                    "date": "2025-09-30",
+                    "task_name": "Submit report",
+                    "task_description": "Submit monthly report to management",
+                    "task_status": "completed"
+                }
+            ]
+        },
+        {
+            "user_id": "321",
+            "user_name": "Мария Иванова",
+            "user_email": "maria.ivanova@example.com",
+            "user_phone": "+79101234567",
+            "user_address": "пр. Мира, д. 25",
+            "user_city": "Санкт-Петербург",
+            "user_state": "",
+            "user_zip": "191002",
+            "user_country": "Россия",
+            "tasks": [
+                {
+                    "task_id": "11",
+                    "user_id": "321",
+                    "date": "2025-10-22",
+                    "task_name": "Провести презентацию",
+                    "task_description": "Подготовить и провести презентацию для клиентов",
+                    "task_status": "pending"
+                },
+                {
+                    "task_id": "12",
+                    "user_id": "321",
+                    "date": "2025-10-19",
+                    "task_name": "Заказать оборудование",
+                    "task_description": "Выбрать и заказать новое оборудование для офиса",
+                    "task_status": "in_progress"
+                }
+            ]
         }
     ]
 }
